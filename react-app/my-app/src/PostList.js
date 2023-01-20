@@ -3,10 +3,10 @@ import {useParams} from 'react-router-dom';
 
 export const PostList=()=>{
   const {id}=useParams();
-  const newID= id.slice(1);
   const [postList,setPostList]=useState([]);
+  const [text,setText]=useState([]);
   useEffect(()=>{
-    fetch(`http://railway-react-bulletin-board.herokuapp.com/threads/${newID}/posts`)
+    fetch(`http://railway-react-bulletin-board.herokuapp.com/threads/${id}/posts?offset=40`)
     .then(response => response.json())
     .then((results)=>{
       setPostList(results.posts)
@@ -21,14 +21,13 @@ export const PostList=()=>{
     });
 
   const sendPost=()=>{
-    const postData =document.getElementById('postData');
     const postFormData ={
-      title:postData.value,
+      post:text,
     };
-    fetch(`http://railway-react-bulletin-board.herokuapp.com/threads/${newID}/posts`,{
+    fetch(`http://railway-react-bulletin-board.herokuapp.com/threads/${id}/posts`,{
       method:"POST",
       headers:{
-        'COntent-Type':'application/json'
+        'Content-Type':'application/json'
       },
       body: JSON.stringify(postFormData)
     })
@@ -44,9 +43,9 @@ export const PostList=()=>{
           {displayPost}
         </div>
         <div class="PostList-form">
-          <textarea id='postData' placeholder='投稿しよう！'></textarea>
+          <textarea id='postData' placeholder='投稿しよう！' onChange={(e)=>setText(e.target.value)}></textarea>
           <div class="postButton">
-            <button onclick={sendPost}>投稿</button>
+            <button onClick={sendPost}>投稿</button>
           </div>
         </div>
       

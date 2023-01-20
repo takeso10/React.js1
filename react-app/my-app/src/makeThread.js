@@ -26,7 +26,7 @@ export const MakeThread=()=>{
         <h2>スレッド新規作成</h2>
         <input type ="text" id='fetchData' placeholder="スレッドタイトル"></input>
         <div class="form-bottom">
-          <button onclick={sendAPI}>作成</button>
+          <button onClick={sendAPI}>作成</button>
         </div>
         
     </div>

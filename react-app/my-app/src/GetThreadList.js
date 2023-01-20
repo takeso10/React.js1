@@ -11,7 +11,7 @@ export const GetThreadList=()=>{
   },[]);
 
   const displayThread = threadList.map((thread)=>{
-    const link ="/thread/:"+thread.id;
+    const link ="/thread/"+thread.id;
     return(
       <tr>
         <td><a href={link}>{thread.title}</a></td>
